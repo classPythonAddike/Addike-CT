@@ -1,5 +1,5 @@
-# Frontend
+# Backend
 
-Frontend for the Challenge Tester, written with Svelte
+Backend for the Challenge Tester, written with Golang
 
 Please Note: This project is still under development
