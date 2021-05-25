@@ -13,18 +13,18 @@
   }
 
   let result_array = [
-    RandomResult(),
-    RandomResult(),
-    RandomResult(),
-    RandomResult(),
-    RandomResult(),
+    new Result("123456789.py", 45.67, 45, 100),
+    new Result("123456789.py", 45.67, 56, 75),
+    new Result("123456789.py", 45.67, 78, 50),
+    new Result("123456789.py", 45.67, 90, 25),
+    new Result("123456789.py", 45.67, 183, 0),
   ];
 
   import Solution from "./Solution.svelte";
 
-  function RandomResult() {
-    return new Result("123456789.py", 45.67, 183, 56.4);
-  }
+  // function RandomResult() {
+  //   return new Result("123456789.py", 45.67, 183, 90);
+  // }
 </script>
 
 <table class="heading">
@@ -38,8 +38,8 @@
 </table>
 
 <div class="container">
-  {#each result_array as { sol_name, time_taken, code_length, progress }, _}
-    <Solution {sol_name} {time_taken} {code_length} {progress} />
+  {#each result_array as sol}
+    <Solution {...sol} />
   {/each}
 </div>
 
@@ -51,11 +51,12 @@
   .container {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 auto;
   }
 
   .heading {
     color: black;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
   }
 
   .title {
@@ -75,7 +76,7 @@
   h1 {
     width: max-content;
     margin-right: 10px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 45px;
@@ -87,7 +88,7 @@
     width: max-content;
     text-align: left;
     margin-left: 0;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 27.2px;
@@ -98,7 +99,7 @@
   h5 {
     width: 100%;
     margin-left: 20px;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 21.2px;

@@ -4,15 +4,27 @@
   export let time_taken;
   export let code_length;
   export let progress;
+
+  let progress_length = (progress / 100) * 503;
+  let bar_color = undefined;
 </script>
 
 <div class="card">
   <div class="name">
-    <img src="personicon.svg" class="personicon" />
+    <img src="personicon.svg" class="personicon" alt="icon" />
     <span>{sol_name}</span>
   </div>
   <div class="progress">
-    {progress}%
+    <svg
+      class="progressbar"
+      stroke-dasharray={progress_length}
+      stroke={bar_color}
+    >
+      <circle cx="90" cy="90" r="80" />
+    </svg>
+    <div class="progress">
+      {progress}%
+    </div>
   </div>
   <div class="info">
     <table class="information">
@@ -22,15 +34,15 @@
       </tr>
       <tr>
         <td class="info-column">
-          <div class="time-placeholder">
-            <p class="time-data" style="display: inline;">{time_taken}</p>
-            <span class="time-unit">s</span>
+          <div class="placeholder">
+            <p class="data" style="display: inline;">{time_taken}</p>
+            <span class="unit">s</span>
           </div>
         </td>
         <td class="info-column-2">
-          <div class="char-placeholder">
-            <p class="char-data" style="display: inline;">{code_length}</p>
-            <span class="char-unit">chars</span>
+          <div class="placeholder">
+            <p class="data" style="display: inline;">{code_length}</p>
+            <span class="unit">chars</span>
           </div>
         </td>
       </tr>
@@ -42,6 +54,7 @@
   .name {
     display: flex;
     justify-content: center;
+    margin: 15px 0;
   }
 
   .personicon {
@@ -87,12 +100,11 @@
     padding-left: 5px;
   }
 
-  .time-placeholder,
-  .char-placeholder {
+  .placeholder {
     width: 100%;
     display: flex;
     justify-content: center;
-    font-family: Montserrat;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 13.3px;
@@ -114,12 +126,13 @@
   }
 
   .progress {
+    margin: auto;
     width: 100%;
     height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Roboto;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 40.8px;
@@ -128,17 +141,28 @@
     color: #000000;
   }
 
+  .progressbar {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    fill: transparent;
+    stroke: black;
+    stroke-width: 10px;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+  }
+
   .info {
     height: 20%;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 10px 0;
   }
 
-  .time-data,
-  .char-data {
-    font-family: Montserrat;
+  .data {
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 15.3px;
@@ -146,10 +170,9 @@
     text-align: center;
   }
 
-  .time-unit,
-  .char-unit {
-    color: #818181;
-    font-family: Montserrat;
+  .unit {
+    color: #353535;
+    font-family: "Montserrat", sans-serif;
     font-weight: 400;
   }
 </style>
