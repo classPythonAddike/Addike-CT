@@ -5,7 +5,7 @@
   export let code_length;
   export let progress;
 
-  let progress_length = (progress / 100) * 503;
+  let progress_length = 503 - ((progress / 100) * 503);
   let bar_color = undefined;
 </script>
 
@@ -17,7 +17,8 @@
   <div class="progress">
     <svg
       class="progressbar"
-      stroke-dasharray={progress_length}
+      stroke-dasharray=503
+      stroke-dashoffset={progress_length}
       stroke={bar_color}
     >
       <circle cx="90" cy="90" r="80" />
