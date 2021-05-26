@@ -17,7 +17,7 @@
     new Result("123456789.py", 45.67, 56, 75),
     new Result("123456789.py", 45.67, 78, 50),
     new Result("123456789.py", 45.67, 90, 25),
-    new Result("123456789.py", 45.67, 183, 0),
+    new Result("123456789.py", 45.67, 183, 1),
   ];
 
   import Solution from "./Solution.svelte";

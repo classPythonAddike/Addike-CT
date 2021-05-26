@@ -6,7 +6,7 @@
   export let progress;
 
   let progress_length = 503 - ((progress / 100) * 503);
-  let bar_color = undefined;
+  let bar_color_value = (progress/100) * 125;
 </script>
 
 <div class="card">
@@ -19,7 +19,7 @@
       class="progressbar"
       stroke-dasharray=503
       stroke-dashoffset={progress_length}
-      stroke={bar_color}
+      stroke="hsl({bar_color_value}, 90%, 47%)"
     >
       <circle cx="90" cy="90" r="80" />
     </svg>
@@ -37,7 +37,7 @@
         <td class="info-column">
           <div class="placeholder">
             <p class="data" style="display: inline;">{time_taken}</p>
-            <span class="unit">s</span>
+            <span class="unit">secs</span>
           </div>
         </td>
         <td class="info-column-2">
@@ -147,7 +147,6 @@
     width: 180px;
     height: 180px;
     fill: transparent;
-    stroke: black;
     stroke-width: 10px;
     stroke-linecap: round;
     transform: rotate(-90deg);
