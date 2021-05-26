@@ -93,7 +93,7 @@ func GetHighlightedString(s string) string {
 	return result
 }
 
-func TestFile(PythonFile string, comp *bool) (bool, string) {
+func TestFile(PythonFile string, comp *bool, resultVar *Resource) (bool, string) {
 
 	var out bool
 	var result string
@@ -112,7 +112,7 @@ func TestFile(PythonFile string, comp *bool) (bool, string) {
 	for _, val := range TestCases.Cases {
 		result, out = runtest(PythonFile, val.Input, val.Output)
 
-		results[len(results)-1].CompletedCases += 1
+		(*resultVar).CompletedCases += 1
 
 		if !out && !(*comp) {
 			result := fmt.Sprintf(
@@ -142,30 +142,19 @@ func TestFile(PythonFile string, comp *bool) (bool, string) {
 	return true, ""
 }
 
-func TestFileOrTimeout(file string) {
+func TestFileOrTimeout(file string, resultVar *Resource) {
 	timer := make(chan string, 1)
 	comp := false
 
 	go func() {
-		start := time.Now()
-
-		outcome := Resource{
-			StartTime:       start,
-			CompletedCases:  0,
-			TotalCases:      len(TestCases.Cases),
-			File:            file,
-			FinishedTesting: false,
-		}
-
-		results = append(results, outcome)
-		res, _ := TestFile(file, &comp)
+		res, _ := TestFile(file, &comp, resultVar)
 
 		if res {
-			results[len(results)-1].CompletedCases = len(TestCases.Cases)
+			(*resultVar).CompletedCases = len(TestCases.Cases)
 		}
 
-		results[len(results)-1].Passed = res
-		results[len(results)-1].FinishedTesting = true
+		(*resultVar).Passed = res
+		(*resultVar).FinishedTesting = true
 
 		timer <- file + " is done"
 	}()
@@ -176,11 +165,7 @@ func TestFileOrTimeout(file string) {
 	case <-time.After(time.Second * 60):
 		color.Set(color.FgYellow)
 		comp = true
-		for pos, f := range results {
-			if f.File == file {
-				results[pos].FinishedTesting = true
-			}
-		}
+		(*resultVar).FinishedTesting = true
 		log.Printf("%v has timed out.\n", file)
 		color.Unset()
 	}
@@ -192,9 +177,10 @@ func TestAllFiles() {
 	log.Printf("Starting tests")
 	color.Unset()
 
-	for _, file := range FileList {
-		TestFileOrTimeout(file)
-		results[len(results)-1].EndTime = time.Now()
+	for pos, file := range FileList {
+		results[pos].StartTime = time.Now()
+		TestFileOrTimeout(file, &results[pos])
+		results[pos].EndTime = time.Now()
 		group.Done()
 	}
 }

@@ -12,13 +12,13 @@ type Case struct {
 }
 
 type Resource struct {
-	File           string
-	TotalCases     int
-	CompletedCases int
+	File           string // Filename
+	TotalCases     int    // Total number of cases to test
+	CompletedCases int    // Number of cases that have been completed
 
-	StartTime time.Time
-	EndTime   time.Time
+	StartTime time.Time // Time at which testing started
+	EndTime   time.Time // Time at which testing ended
 
-	Passed          bool
-	FinishedTesting bool
+	Passed          bool // Whether the file passed, or not
+	FinishedTesting bool // Whether testing has ended, or not
 }

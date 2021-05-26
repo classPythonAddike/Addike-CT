@@ -18,12 +18,9 @@ func main() {
 
 	go TestAllFiles()
 
-	http.HandleFunc("/tests", HandleTestsRequest)
 	http.HandleFunc("/results", ServeResults)
 	//http.HandleFunc("/", ServeUI)
-	http.HandleFunc("/getcode", HandleCodeRequest)
-
-	log.Fatal(http.ListenAndServe(":5000", nil))
+	log.Fatal(http.ListenAndServe(":5555", nil))
 
 	color.Unset()
 }

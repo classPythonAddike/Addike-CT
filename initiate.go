@@ -63,6 +63,17 @@ func InitTests(valid bool) {
 
 	FileList = GetFiles()
 
+	for _, i := range GetFiles() {
+		res := Resource{
+			File:            i,
+			Passed:          false,
+			FinishedTesting: false,
+			CompletedCases:  0,
+			TotalCases:      len(TestCases.Cases),
+		}
+		results = append(results, res)
+	}
+
 	group.Add(len(FileList))
 
 	log.Printf("Found %v tests\n", len(FileList))

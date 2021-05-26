@@ -1,10 +1,8 @@
 package main
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"path/filepath"
 )
 
@@ -39,9 +37,4 @@ func GetValidator() string { // Find the validate.py file
 
 	log.Fatal("Could not find validator script: validate.py in " + dir)
 	return ""
-}
-
-func HandleTestsRequest(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	json.NewEncoder(w).Encode(FileList)
 }
