@@ -3,10 +3,10 @@
   export let sol_name;
   export let time_taken;
   export let code_length;
-  export let progress;
+  export let progress = 0;
 
-  let progress_length = 503 - ((progress / 100) * 503);
-  let bar_color_value = (progress/100) * 125;
+  $: progress_length = 503 - ((progress / 100) * 503);
+  $: bar_color_value = (progress/100) * 125;
 </script>
 
 <div class="card">

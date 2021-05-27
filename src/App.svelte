@@ -1,10 +1,12 @@
 <script>
-  let ChallengeName = "Simon Says";
-  let ChallengeDescription =
-    "Only what Simon said counts! On each test, you will be given a  string of any length. This string can be anything. Your job is to output what Simon said!";
+  import Solution from "./Solution.svelte";
+
+  let ChallengeName = "---"; // "Simon Says"
+  let ChallengeDescription = "---"
+    // "Only what Simon said counts! On each test, you will be given a  string of any length. This string can be anything. Your job is to output what Simon said!";
 
   class Result {
-    constructor(file, time, length, progress) {
+    constructor(file, progress, time, length) {
       this.sol_name = file;
       this.time_taken = time;
       this.code_length = length;
@@ -12,19 +14,44 @@
     }
   }
 
-  let result_array = [
-    new Result("123456789.py", 45.67, 45, 100),
-    new Result("123456789.py", 45.67, 56, 75),
-    new Result("123456789.py", 45.67, 78, 50),
-    new Result("123456789.py", 45.67, 90, 25),
-    new Result("123456789.py", 45.67, 183, 1),
-  ];
+  let result_array = []
 
-  import Solution from "./Solution.svelte";
+  async function getStartup() {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/startup')
+      const data = await response.json()
 
-  // function RandomResult() {
-  //   return new Result("123456789.py", 45.67, 183, 90);
-  // }
+      ChallengeName = data.name
+      ChallengeDescription = data.description
+
+      document.title = `${data.name} | Challenge Tester`
+
+      result_array = data.files.map((file) => {
+        return new Result(file.name, file.progress, file.time, file.length)
+      })
+    }
+    catch {
+      console.log("Unable to connect to backend.")
+    }
+  }
+
+  getStartup()
+
+  const interval = setInterval(() => {getUpdate()}, 1000)
+  async function getUpdate() {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/progress')
+      const data = await response.json()
+
+      data.values.forEach((progress, index) => {
+        result_array[index].progress = progress
+      })
+    }
+    catch {
+      console.log("Unable to connect to backend.")
+      clearInterval(interval)
+    }
+  }
 </script>
 
 <table class="heading">
