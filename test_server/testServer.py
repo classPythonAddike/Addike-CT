@@ -11,35 +11,31 @@ starter_data = {
     "files": [{
         "name": "123456789.py",
         "progress": 100,
-        "time": 45.67,
         "length": 45
     },
     {
         "name": "123456789.py",
         "progress": 75,
-        "time": 45.67,
         "length": 56
     },
     {
         "name": "123456789.py",
         "progress": 50,
-        "time": 45.67,
         "length": 78
     },
     {
         "name": "123456789.py",
         "progress": 25,
-        "time": 45.67,
         "length": 90
     },
     {
         "name": "123456789.py",
         "progress": 1,
-        "time": 45.67,
         "length": 183
     }]
 }
-progresses = {"values": [99,74,49,24,2]}
+progresses = {"values": [99,74,49,24,2],
+                "times": [29.34,29.34,29.34,29.34,29.34]}
 
 @app.route('/startup')
 @cross_origin()

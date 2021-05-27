@@ -46,6 +46,9 @@
       data.values.forEach((progress, index) => {
         result_array[index].progress = progress
       })
+      data.times.forEach((time, index) => {
+        result_array[index].time = time
+      })
     }
     catch {
       console.log("Unable to connect to backend.")
