@@ -1,2 +1,3 @@
-math = eval("__i" + "mport__" + "('math')")
-print(input() * 5)
+for k in range(int(input())):
+    i = int(input())
+    print(i * (i - 1)//2)

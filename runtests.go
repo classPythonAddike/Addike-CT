@@ -59,6 +59,10 @@ func runtest(file string, input []string, output string) (string, bool) {
 	dat, err := ioutil.ReadAll(stdout)
 	data := string(dat)
 
+	//if runtime.GOOS == "windows" {
+	//	data = strings.ReplaceAll(data, "\r", "")
+	//}
+
 	if err != nil {
 		log.Fatal(err)
 	}

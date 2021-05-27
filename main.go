@@ -18,9 +18,10 @@ func main() {
 
 	go TestAllFiles()
 
-	http.HandleFunc("/results", ServeResults)
+	http.HandleFunc("/startup", ServeResults)
+	http.HandleFunc("/progress", ServeProgress)
 	//http.HandleFunc("/", ServeUI)
-	log.Fatal(http.ListenAndServe(":5555", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 
 	color.Unset()
 }

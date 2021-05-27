@@ -1,6 +1,8 @@
 package main
 
-import "time"
+import (
+	"time"
+)
 
 type JsonResults struct {
 	Cases []Case
@@ -21,4 +23,6 @@ type Resource struct {
 
 	Passed          bool // Whether the file passed, or not
 	FinishedTesting bool // Whether testing has ended, or not
+
+	CodeLength int
 }
