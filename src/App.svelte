@@ -1,9 +1,8 @@
 <script>
   import Solution from "./Solution.svelte";
 
-  let ChallengeName = "---"; // "Simon Says"
-  let ChallengeDescription = "---"
-    // "Only what Simon said counts! On each test, you will be given a  string of any length. This string can be anything. Your job is to output what Simon said!";
+  let ChallengeName = "---";
+  let ChallengeDescription = "---";
 
   class Result {
     constructor(file, progress, time, length) {
@@ -14,45 +13,45 @@
     }
   }
 
-  let result_array = []
+  let result_array = [];
 
   async function getStartup() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/startup')
-      const data = await response.json()
+      const response = await fetch("http://localhost:8080/startup");
+      const data = await response.json();
 
-      ChallengeName = data.name
-      ChallengeDescription = data.description
+      ChallengeName = data.Name;
+      ChallengeDescription = data.Description;
 
-      document.title = `${data.name} | Challenge Tester`
+      document.title = `${data.Name} | Challenge Tester`;
 
-      result_array = data.files.map((file) => {
-        return new Result(file.name, file.progress, file.time, file.length)
-      })
-    }
-    catch {
-      console.log("Unable to connect to backend.")
+      result_array = data.Files.map((file) => {
+        return new Result(file.File, 0, 0, file.CodeLength);
+      });
+    } catch {
+      console.log("Unable to connect to backend.");
     }
   }
 
-  getStartup()
+  getStartup();
 
-  const interval = setInterval(() => {getUpdate()}, 1000)
+  const interval = setInterval(() => {
+    getUpdate();
+  }, 50);
   async function getUpdate() {
     try {
-      const response = await fetch('http://127.0.0.1:5000/progress')
-      const data = await response.json()
+      const response = await fetch("http://localhost:8080/progress");
+      const data = await response.json();
 
-      data.values.forEach((progress, index) => {
-        result_array[index].progress = progress
-      })
-      data.times.forEach((time, index) => {
-        result_array[index].time = time
-      })
-    }
-    catch {
-      console.log("Unable to connect to backend.")
-      clearInterval(interval)
+      data.Values.forEach((progress, index) => {
+        result_array[index].progress = progress.toFixed(1);
+      });
+      data.Times.forEach((time, index) => {
+        result_array[index].time_taken = time.toFixed(1);
+      });
+    } catch {
+      console.log("Unable to connect to backend.");
+      clearInterval(interval);
     }
   }
 </script>
@@ -68,8 +67,8 @@
 </table>
 
 <div class="container">
-  {#each result_array as sol}
-    <Solution {...sol} />
+  {#each result_array as soln}
+    <Solution {...soln} />
   {/each}
 </div>
 
@@ -80,13 +79,14 @@
 
   .container {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
   }
 
   .heading {
     color: black;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 
   .title {
@@ -106,7 +106,7 @@
   h1 {
     width: max-content;
     margin-right: 10px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 45px;
@@ -118,7 +118,7 @@
     width: max-content;
     text-align: left;
     margin-left: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 27.2px;
@@ -129,7 +129,7 @@
   h5 {
     width: 100%;
     margin-left: 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 21.2px;
