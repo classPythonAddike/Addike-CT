@@ -13,7 +13,7 @@ import (
 )
 
 func validate(file string) (bool, string) {
-	command := exec.Command(cmd, "validate.py", file)
+	command := exec.Command(cmd, "./config/validate.py", file)
 	stdout, err := command.StdoutPipe()
 
 	if err != nil {
@@ -166,7 +166,7 @@ func TestFileOrTimeout(file string, resultVar *Resource) {
 	select {
 	case <-timer:
 		fmt.Print("")
-	case <-time.After(time.Second * 60):
+	case <-time.After(time.Second * time.Duration(ChallengeInfo.Timeout)):
 		color.Set(color.FgYellow)
 		comp = true
 		(*resultVar).FinishedTesting = true
@@ -187,4 +187,7 @@ func TestAllFiles() {
 		results[pos].EndTime = time.Now()
 		group.Done()
 	}
+
+	WriteResults()
+	RunCleanUpCommand()
 }

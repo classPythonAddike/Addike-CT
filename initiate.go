@@ -5,7 +5,6 @@ import (
 	"errors"
 	"io/ioutil"
 	"log"
-	"os"
 	"os/exec"
 	"runtime"
 	"sync"
@@ -13,6 +12,7 @@ import (
 	"github.com/fatih/color"
 )
 
+var ChallengeInfo ChallengeDetails
 var FileList []string
 var cmd string
 var ValidateFiles bool
@@ -22,33 +22,38 @@ var results []Resource
 
 func InitTests(valid bool) {
 
+	var file []byte
+	var err error
+	var os string
+	var path string
+	var code []byte
+	var length int
+	var res Resource
+
 	ValidateFiles = valid
 
-	f, err := os.Open("challenge.txt")
-	f.Close()
-
+	file, err = ioutil.ReadFile("config/challenge-info.json")
 	if err != nil {
-		log.Fatal("Error while reading file `challenge.txt`!")
+		log.Fatal(err)
 	}
-
-	log.Println("Found file: challenge.txt")
-	file, err := ioutil.ReadFile("cases.json")
-
+	err = json.Unmarshal(file, &ChallengeInfo)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = json.Unmarshal([]byte(file), &TestCases)
-
+	file, err = ioutil.ReadFile("config/cases.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = json.Unmarshal(file, &TestCases)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	color.Set(color.FgWhite)
-	log.Println("Found test cases in file cases.json")
+	log.Println("Found test cases in file config/cases.json")
 
-	os := runtime.GOOS
-	var path string
+	os = runtime.GOOS
 
 	switch os {
 	case "windows":
@@ -79,10 +84,10 @@ func InitTests(valid bool) {
 
 	for _, i := range GetFiles() {
 
-		code, _ := ioutil.ReadFile(i)
-		length := len(code)
+		code, _ = ioutil.ReadFile(i)
+		length = len(code)
 
-		res := Resource{
+		res = Resource{
 			File:            i,
 			Passed:          false,
 			FinishedTesting: false,

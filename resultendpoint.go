@@ -1,11 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -23,38 +21,19 @@ func ServeResults(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 
 	ReturnData := StartupData{
-		Name:        "Undefined",
-		Description: "Undefined",
+		Name:        ChallengeInfo.ChallengeName,
+		Description: ChallengeInfo.ChallengeDescription,
 		Files:       results,
-	}
-
-	file, _ := os.Open("challenge.txt")
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-
-	ChallengeName := ""
-	ChallengeDescription := ""
-
-	for scanner.Scan() {
-		if ChallengeName == "" {
-			ChallengeName += scanner.Text()
-		} else {
-			ChallengeDescription += scanner.Text()
-		}
-	}
-
-	if ChallengeName != "" && ChallengeDescription != "" {
-		ReturnData.Description = ChallengeDescription
-		ReturnData.Name = ChallengeName
 	}
 
 	json.NewEncoder(w).Encode(ReturnData)
 }
 
 type ProgressResults struct {
-	Values []float32 // Percentage of tests completed
-	Times  []float32 // Time taken for each test
+	Values          []float32 // Percentage of tests completed
+	Times           []float32 // Time taken for each test
+	FinishedTesting []bool
+	Passed          []bool
 }
 
 func ServeProgress(w http.ResponseWriter, r *http.Request) {
@@ -69,6 +48,16 @@ func ServeProgress(w http.ResponseWriter, r *http.Request) {
 		ReturnData.Values = append(
 			ReturnData.Values,
 			float32(file.CompletedCases)*float32(100)/float32(file.TotalCases),
+		)
+
+		ReturnData.FinishedTesting = append(
+			ReturnData.FinishedTesting,
+			file.FinishedTesting,
+		)
+
+		ReturnData.Passed = append(
+			ReturnData.Passed,
+			file.Passed,
 		)
 
 		if file.FinishedTesting || file.EndTime == file.StartTime {

@@ -26,3 +26,12 @@ type Resource struct {
 
 	CodeLength int
 }
+
+type ChallengeDetails struct {
+	ChallengeName        string
+	ChallengeDescription string
+
+	CleanUpCommand string
+
+	Timeout int
+}
