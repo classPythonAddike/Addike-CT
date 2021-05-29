@@ -4,6 +4,8 @@
   let ChallengeName = "---";
   let ChallengeDescription = "---";
 
+  let error_happened = false;
+
   class Result {
     constructor(file, progress, time, length) {
       this.sol_name = file;
@@ -13,11 +15,37 @@
     }
   }
 
+  async function fetchSpecial(resource, options) {
+    const { timeout } = options;
+
+    const controller = new AbortController();
+    const id = setTimeout(() => {
+      controller.abort();
+    }, timeout);
+
+    const response = await fetch(resource, {
+      ...options,
+      signal: controller.signal,
+    });
+    clearTimeout(id);
+
+    return response;
+  }
+
+  function handleError(error) {
+    if (!error_happened) error_happened = !error_happened;
+    if (error.name == "AbortError") alert("Backend could be offline.\nCheck if it's still running and reload the page")
+    else {
+      alert(`Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`);
+      console.log(`An error has occurred. Error: ${error}`);
+    }
+  }
+
   let result_array = [];
 
   async function getStartup() {
     try {
-      const response = await fetch("http://localhost:8080/startup");
+      const response = await fetchSpecial("http://localhost:8080/startup", {timeout: 120});
       const data = await response.json();
 
       ChallengeName = data.Name;
@@ -28,19 +56,24 @@
       result_array = data.Files.map((file) => {
         return new Result(file.File, 0, 0, file.CodeLength);
       });
-    } catch {
-      console.log("Unable to connect to backend.");
+    } catch (err) {
+      handleError(err);
     }
   }
 
   getStartup();
 
-  const interval = setInterval(() => {
-    getUpdate();
-  }, 50);
+  setTimeout(() => {
+    if (!error_happened) {
+      const loop = setInterval(() => {
+        getUpdate();
+      }, 50);
+    }
+  }, 150);
+
   async function getUpdate() {
     try {
-      const response = await fetch("http://localhost:8080/progress");
+      const response = await fetchSpecial("http://localhost:8080/progress", {timeout: 50});
       const data = await response.json();
 
       data.Values.forEach((progress, index) => {
@@ -49,9 +82,9 @@
       data.Times.forEach((time, index) => {
         result_array[index].time_taken = time.toFixed(1);
       });
-    } catch {
-      console.log("Unable to connect to backend.");
-      clearInterval(interval);
+    } catch (err) {
+      clearInterval(loop);
+      handleError(err);
     }
   }
 </script>
