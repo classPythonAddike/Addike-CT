@@ -8,7 +8,7 @@ for i in range(300):
 		num = random.randint(1, 1000)
 		sol = num * (num - 1)//2
 		case["Input"] += [str(num)]
-		case["Output"] += str(sol) + "\n"
+		case["Output"] += str(sol) + "\r\n"
 
 	cases["Cases"] += [case]
 

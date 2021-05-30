@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/fatih/color"
 )
@@ -20,7 +21,11 @@ func main() {
 
 	http.HandleFunc("/startup", ServeResults)
 	http.HandleFunc("/progress", ServeProgress)
-	//http.HandleFunc("/", ServeUI)
+	http.HandleFunc("/", ServeUI)
+
+	dir := os.Getenv("CTPath")
+	log.Println(dir)
+
 	log.Println("Running on `localhost:8080`")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 

@@ -2,8 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -77,6 +78,9 @@ func ServeProgress(w http.ResponseWriter, r *http.Request) {
 }
 
 func ServeUI(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Serving UI!")
-	http.ServeFile(w, r, "../static/index.html")
+	var dir string
+	var file string
+	dir = os.Getenv("CTPath")
+	file = (*r).URL.Path
+	http.ServeFile(w, r, filepath.Join(dir, file))
 }
