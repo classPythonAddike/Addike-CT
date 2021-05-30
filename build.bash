@@ -7,7 +7,7 @@ do
     platform_split=(${platform//\// })
     GOOS=${platform_split[0]}
     GOARCH=${platform_split[1]}
-    output_name='bin/'$platform'/challenge-tester'
+    output_name='bin/'$platform'/addike-ct'
     if [ $GOOS = "windows" ]; then
         output_name+='.exe'
     fi

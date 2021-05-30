@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,8 +13,14 @@ import (
 func main() {
 
 	validate := flag.Bool("validate", false, "Validate each script with `validate.py`")
+	version := flag.Bool("version", false, "Output version information")
 
 	flag.Parse()
+
+	if *version {
+		fmt.Println("Addike-ct v0.0.1 (alpha)")
+		return
+	}
 
 	InitTests(*validate)
 
