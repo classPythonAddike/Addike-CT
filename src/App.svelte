@@ -4,6 +4,8 @@
   let ChallengeName = "---";
   let ChallengeDescription = "----------";
 
+  let error_happened = false;
+
   class Result {
     constructor(file, progress, time, length, finished, passed) {
       this.sol_name = file;
@@ -32,19 +34,7 @@
     return response;
   }
 
-  function handleError(error) {
-    if (!error_happened) error_happened = !error_happened;
-    if (error.name == "AbortError")
-      alert(
-        "Backend could be offline.\nCheck if it's still running and reload the page"
-      );
-    else {
-      alert(
-        `Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`
-      );
-      console.log(`An error has occurred. Error: ${error}`);
-    }
-  }
+
 
   let result_array = [];
 
@@ -63,16 +53,23 @@
       result_array = data.Files.map((file) => {
         return new Result(file.File, 0, 0, file.CodeLength, false, false);
       });
-    } catch {
-      console.log("Unable to connect to backend.");
+    } catch(err) {
+      handleError(err);
     }
   }
 
   getStartup();
 
-  const interval = setInterval(() => {
-    getUpdate();
-  }, 50);
+  let loop = undefined;
+
+  setTimeout(() => {
+    if (!error_happened) {
+      loop = setInterval(() => {
+        getUpdate();
+      }, 50);
+    }
+  }, 150);
+
   async function getUpdate() {
     try {
       const response = await fetchSpecial("http://localhost:8080/progress", {
@@ -93,8 +90,23 @@
         result_array[index].passed = pass;
       });
     } catch (err) {
-      clearInterval(loop);
       handleError(err);
+    }
+  }
+
+  function handleError(error) {
+    console.log(loop);
+    if (!error_happened) error_happened = !error_happened;
+    if (loop) clearInterval(loop);
+    if (error.name == "AbortError")
+      alert(
+        "Backend could be offline.\nCheck if it's still running and reload the page"
+      );
+    else {
+      alert(
+        `Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`
+      );
+      console.log(`An error has occurred. Error: ${error}`);
     }
   }
 </script>
