@@ -2,16 +2,18 @@
   import Solution from "./Solution.svelte";
 
   let ChallengeName = "---";
-  let ChallengeDescription = "---";
+  let ChallengeDescription = "----------";
 
   let error_happened = false;
 
   class Result {
-    constructor(file, progress, time, length) {
+    constructor(file, progress, time, length, finished, passed) {
       this.sol_name = file;
       this.time_taken = time;
       this.code_length = length;
       this.progress = progress;
+      this.finished = finished;
+      this.passed = passed;
     }
   }
 
@@ -34,9 +36,14 @@
 
   function handleError(error) {
     if (!error_happened) error_happened = !error_happened;
-    if (error.name == "AbortError") alert("Backend could be offline.\nCheck if it's still running and reload the page")
+    if (error.name == "AbortError")
+      alert(
+        "Backend could be offline.\nCheck if it's still running and reload the page"
+      );
     else {
-      alert(`Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`);
+      alert(
+        `Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`
+      );
       console.log(`An error has occurred. Error: ${error}`);
     }
   }
@@ -45,7 +52,9 @@
 
   async function getStartup() {
     try {
-      const response = await fetchSpecial("http://localhost:8080/startup", {timeout: 120});
+      const response = await fetchSpecial("http://localhost:8080/startup", {
+        timeout: 120,
+      });
       const data = await response.json();
 
       ChallengeName = data.Name;
@@ -54,7 +63,7 @@
       document.title = `${data.Name} | Challenge Tester`;
 
       result_array = data.Files.map((file) => {
-        return new Result(file.File, 0, 0, file.CodeLength);
+        return new Result(file.File, 0, 0, file.CodeLength, false, false);
       });
     } catch (err) {
       handleError(err);
@@ -73,7 +82,9 @@
 
   async function getUpdate() {
     try {
-      const response = await fetchSpecial("http://localhost:8080/progress", {timeout: 50});
+      const response = await fetchSpecial("http://localhost:8080/progress", {
+        timeout: 50,
+      });
       const data = await response.json();
 
       data.Values.forEach((progress, index) => {
@@ -81,6 +92,12 @@
       });
       data.Times.forEach((time, index) => {
         result_array[index].time_taken = time.toFixed(1);
+      });
+      data.FinishedTesting.forEach((finished, index) => {
+        result_array[index].finished = finished;
+      });
+      data.Passed.forEach((pass, index) => {
+        result_array[index].passed = pass;
       });
     } catch (err) {
       clearInterval(loop);
