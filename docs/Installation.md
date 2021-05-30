@@ -21,3 +21,5 @@ $ addike-ct -version
 Addike-ct v0.0.1 (alpha)
   ```
 You may have to restart your terminal for these changes to take effect.
+
+Once you're done, head over to [Setup.md](/docs/Setup.md) to create your first suite of tests!
