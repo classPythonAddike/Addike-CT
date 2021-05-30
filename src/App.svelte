@@ -2,14 +2,47 @@
   import Solution from "./Solution.svelte";
 
   let ChallengeName = "---";
-  let ChallengeDescription = "---";
+  let ChallengeDescription = "----------";
 
   class Result {
-    constructor(file, progress, time, length) {
+    constructor(file, progress, time, length, finished, passed) {
       this.sol_name = file;
       this.time_taken = time;
       this.code_length = length;
       this.progress = progress;
+      this.finished = finished;
+      this.passed = passed;
+    }
+  }
+
+  async function fetchSpecial(resource, options) {
+    const { timeout } = options;
+
+    const controller = new AbortController();
+    const id = setTimeout(() => {
+      controller.abort();
+    }, timeout);
+
+    const response = await fetch(resource, {
+      ...options,
+      signal: controller.signal,
+    });
+    clearTimeout(id);
+
+    return response;
+  }
+
+  function handleError(error) {
+    if (!error_happened) error_happened = !error_happened;
+    if (error.name == "AbortError")
+      alert(
+        "Backend could be offline.\nCheck if it's still running and reload the page"
+      );
+    else {
+      alert(
+        `Something has gone wrong.\nTry checking if the backend is running or reload this page.\nError: ${error}`
+      );
+      console.log(`An error has occurred. Error: ${error}`);
     }
   }
 
@@ -17,7 +50,9 @@
 
   async function getStartup() {
     try {
-      const response = await fetch("http://localhost:8080/startup");
+      const response = await fetchSpecial("http://localhost:8080/startup", {
+        timeout: 120,
+      });
       const data = await response.json();
 
       ChallengeName = data.Name;
@@ -26,7 +61,7 @@
       document.title = `${data.Name} | Challenge Tester`;
 
       result_array = data.Files.map((file) => {
-        return new Result(file.File, 0, 0, file.CodeLength);
+        return new Result(file.File, 0, 0, file.CodeLength, false, false);
       });
     } catch {
       console.log("Unable to connect to backend.");
@@ -40,7 +75,9 @@
   }, 50);
   async function getUpdate() {
     try {
-      const response = await fetch("http://localhost:8080/progress");
+      const response = await fetchSpecial("http://localhost:8080/progress", {
+        timeout: 50,
+      });
       const data = await response.json();
 
       data.Values.forEach((progress, index) => {
@@ -49,9 +86,15 @@
       data.Times.forEach((time, index) => {
         result_array[index].time_taken = time.toFixed(1);
       });
-    } catch {
-      console.log("Unable to connect to backend.");
-      clearInterval(interval);
+      data.FinishedTesting.forEach((finished, index) => {
+        result_array[index].finished = finished;
+      });
+      data.Passed.forEach((pass, index) => {
+        result_array[index].passed = pass;
+      });
+    } catch (err) {
+      clearInterval(loop);
+      handleError(err);
     }
   }
 </script>

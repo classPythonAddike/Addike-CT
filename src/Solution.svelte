@@ -4,9 +4,23 @@
   export let time_taken;
   export let code_length;
   export let progress = 0;
+  export let finished;
+  export let passed;
 
-  $: progress_length = 503 - ((progress / 100) * 503);
-  $: bar_color_value = (progress/100) * 125;
+  let progress_modified = 0;
+
+  //  $: bar_color_value = (progress/100) * 125;
+  $: bar_color_value =
+    finished && passed
+      ? "#079015"
+      : finished && !passed
+      ? "#B12000"
+      : !finished && time_taken > 0
+      ? "#074F90"
+      : "#A5A5A5";
+
+  $: progress_modified = !finished && time_taken == 0 ? 100 : progress; // gray bg if testing has not started
+  $: progress_length = 503 - (progress_modified / 100) * 503;
 </script>
 
 <div class="card">
@@ -17,9 +31,9 @@
   <div class="progress">
     <svg
       class="progressbar"
-      stroke-dasharray=503
+      stroke-dasharray="503"
       stroke-dashoffset={progress_length}
-      stroke="hsl({bar_color_value}, 90%, 47%)"
+      stroke={bar_color_value}
     >
       <circle cx="90" cy="90" r="80" />
     </svg>
