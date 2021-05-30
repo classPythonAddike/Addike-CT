@@ -1,3 +1,9 @@
+<div align="center">
+  <h1> Addike-CT </h1>
+</div>
+
+Make sure you have installed, and verified your installation of Addike-CT before continuing
+
 ## ⛏️ Setup 
 
 1. In your workspace, where your Python files are, create a folder named `config`.
@@ -5,14 +11,14 @@
 2. Next, create a file in `config` with the name `challenge-info.json`. This file will be used to provide the tester with information about the testing. Open the file, and paste the following text in it:
 ```json
 {
-  "ChallengeName": <Title>,
-  "ChallengeDescription": <Description>,
-  "CleanUpCommand": <Command>,
-  "Timeout": <Timeout>
+  "ChallengeName": Title,
+  "ChallengeDescription": Description,
+  "CleanUpCommand": Command,
+  "Timeout": Timeout
 }
 ```
 Where:
-```md
+```
 1. Title (string) - The name of the challenge
 2. Description (string) - The challenge's description
 3. Command (string) - A command to run, after the testing has finished. If you don't want to run anything after the testing, set it to something like `````cls```
@@ -21,22 +27,19 @@ Where:
 
 3. (Optional) Create a file named `validate.py` in the `config` directory. This will be used to check whether a file is valid, to ensure that certain conditions are met (like no imports, eval, exec, etc). The file that `validate.py` will have to check will be passed in as a command line argument. You can see a sample of this over [here](./pythontests/config/validate.py)
 
-4. Finally, you need to create some testcases! Make a file named `cases.json` in the `config` directory. In it, you can write the input and output for each test, like so -
+4. Finally, you need to create some testcases! Make a file named `cases.json` in the `config` directory. In it, you can write the input and output for each test. The input must be an array of strings, and the output, one string, like so -
 
 ```json
 {
   "Cases": [
   {
-    "Input": ["84", "937"], // Each line of input as a separate element
-    "Output": "85\n938" // The output expected
+    "Input": ["84", "937"],
+    "Output": "85\n938"
   },
   {
     "Input": ["24", "137"],
     "Output": "25\n138"
   },
-  // .
-  // .
-  // .
   ]
 }
 ```
@@ -60,4 +63,4 @@ You should see some output like this -
   <img src="./Pictures/output.png" />
 </p>
 
-If yes, congratulate yourself! You have successfully installed, and used `addike-ct`! You may also navigate to [localhost:8080](http://localhost:8080) to view your results in the form of a webpage, which was made with Svelte.
+If yes, congratulate yourself! You have successfully installed, and used `addike-ct`! You may also navigate to [localhost:8080](http://localhost:8080) to view your results in the form of a webpage, which was made with Svelte!
