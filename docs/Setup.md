@@ -60,7 +60,7 @@ The latter tests files _only after validating them_. If you use this, you will n
 
 You should see some output like this - 
 <p align="center">
-  <img src="./Pictures/output.png" />
+  <img src="/Pictures/output.png" />
 </p>
 
 If yes, congratulate yourself! You have successfully installed, and used `addike-ct`! You may also navigate to [localhost:8080](http://localhost:8080) to view your results in the form of a webpage, which was made with Svelte!
