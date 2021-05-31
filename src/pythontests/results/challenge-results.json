@@ -1,0 +1,52 @@
+[
+  {
+    "File": "main.py",
+    "TotalCases": 300,
+    "CompletedCases": 300,
+    "StartTime": "2021-05-30T17:52:08.1845209+05:30",
+    "EndTime": "2021-05-30T17:52:18.6262355+05:30",
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 80
+  },
+  {
+    "File": "mysolution.py",
+    "TotalCases": 300,
+    "CompletedCases": 7,
+    "StartTime": "2021-05-30T17:52:18.6262361+05:30",
+    "EndTime": "2021-05-30T17:52:48.6273726+05:30",
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 126
+  },
+  {
+    "File": "thedoctor.py",
+    "TotalCases": 300,
+    "CompletedCases": 1,
+    "StartTime": "2021-05-30T17:52:48.6273731+05:30",
+    "EndTime": "2021-05-30T17:52:48.6891977+05:30",
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 116
+  },
+  {
+    "File": "thefirstalt.py",
+    "TotalCases": 300,
+    "CompletedCases": 0,
+    "StartTime": "2021-05-30T17:52:48.6891985+05:30",
+    "EndTime": "2021-05-30T17:52:48.7237176+05:30",
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 77
+  },
+  {
+    "File": "thepres.py",
+    "TotalCases": 300,
+    "CompletedCases": 1,
+    "StartTime": "2021-05-30T17:52:48.7237186+05:30",
+    "EndTime": "2021-05-30T17:52:48.7845539+05:30",
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 124
+  }
+]

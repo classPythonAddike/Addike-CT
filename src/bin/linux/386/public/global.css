@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("./bg-img.svg");
+    background-attachment: fixed;
+    padding: 10px;
+}
