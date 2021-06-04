@@ -13,7 +13,7 @@
 
 ### 🏁 Introduction
 
-Addike-CT is an efficient, and user-friendly program tester, implemented in Golang and Svelte. When it is run, it compares the stdout of programs in the working directory against the required stdout in a secure manner. It also implements a clean ui, in the browser, so you can easily track the progress of your testing!
+Addike-CT is an efficient, and user-friendly program tester, implemented in Golang and Svelte. When it is executed, it compares the stdout of programs in the working directory against the required stdout in a secure manner. It also implements a clean ui, in the browser, so you can easily track the progress of your testing!
 
 ### ⛏️ Download & Install
 
