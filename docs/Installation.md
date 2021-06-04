@@ -6,8 +6,8 @@
 
 There are two ways to download Addike-CT
 
-1. From Releases - Head over to the [Releases tab](https://github.com/Addike-CT/Backend/releases), and download the zip file which matches your operating system. Unzip the file. You should see an executable, and a folder named `public` in the unzipped contents.
-2. From Source - Fork, and clone this repository to your computer. Navigate into the directory, then run `go build .` In addition to this, you will need to download the the minified files for the frontend of the tester. The full instructions for the same can be found [here](https://github.com/Challenge-Tester/Frontend).
+1. From Releases - Head over to the [Releases tab](https://github.com/classPythonAddike/Challenge-Tester-Backend/releases), and download the zip file which matches your operating system. Unzip the file. You should see an executable, and a folder named `public` in the unzipped contents.
+2. From Source - Fork, and clone this repository to your computer. Navigate into the directory, then run `go build .` In addition to this, you will need to download the the minified files for the frontend of the tester. The full instructions for the same can be found [here](https://github.com/classPythonAddike/Challenge-Tester-Frontend).
 
 ## 📁 Install 
 

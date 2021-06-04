@@ -17,7 +17,7 @@ Addike-CT is an efficient, and user-friendly program tester, implemented in Gola
 
 ### ⛏️ Download & Install
 
-You can download the zip files for your operating system from the [Release tab](https://github.com/Addike-CT/Backend/releases). For detailed installation instructions check out [Installation.md](/docs/Installation.md)
+You can download the zip files for your operating system from the [Release tab](https://github.com/classPythonAddike/Challenge-Tester-Backend/releases). For detailed installation instructions check out [Installation.md](/docs/Installation.md)
 
 ### ⬅️ Contributing
 
