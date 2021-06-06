@@ -25,7 +25,7 @@ Where:
 4. Timeout (integer) - The maximum time allowed, in seconds for a file to finish all tests
 ```
 
-3. (Optional) Create a file named `validate.py` in the `config` directory. This will be used to check whether a file is valid, to ensure that certain conditions are met (like no imports, eval, exec, etc). The file that `validate.py` will have to check will be passed in as a command line argument. You can see a sample of this over [here](src/pythontests/config/validate.py)
+3. (Optional) Create a file named `validate.py` in the `config` directory. This will be used to check whether a file is valid, to ensure that certain conditions are met (like no imports, eval, exec, etc). The file that `validate.py` will have to check will be passed in as a command line argument. You can see a sample of this over [here](../src/pythontests/config/validate.py)
 
 4. Finally, you need to create some testcases! Make a file named `cases.json` in the `config` directory. In it, you can write the input and output for each test. The input must be an array of strings, and the output, one string, like so -
 
