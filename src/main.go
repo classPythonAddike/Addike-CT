@@ -1,18 +1,16 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"log"
-	"net/http"
 
 	"github.com/fatih/color"
+	flag "github.com/spf13/pflag"
 )
 
 func main() {
 
-	validate := flag.Bool("validate", false, "Validate each script with `validate.py`")
 	version := flag.Bool("version", false, "Output version information")
+	flagNoColor := flag.Bool("no-color", false, "Disable colour output")
 
 	flag.Parse()
 
@@ -21,16 +19,7 @@ func main() {
 		return
 	}
 
-	InitTests(*validate)
+	color.NoColor = *flagNoColor
 
-	go TestAllFiles()
-
-	http.HandleFunc("/startup", ServeResults)
-	http.HandleFunc("/progress", ServeProgress)
-	http.HandleFunc("/", ServeUI)
-
-	log.Println("Running on `localhost:8080`")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-
-	color.Unset()
+	InitTests()
 }

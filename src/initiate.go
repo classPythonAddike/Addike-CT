@@ -2,104 +2,146 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
-	"log"
 	"os/exec"
-	"runtime"
-	"sync"
+	"path/filepath"
+	"strings"
 
-	"github.com/fatih/color"
+	"github.com/google/shlex"
 )
 
-var ChallengeInfo ChallengeDetails
-var FileList []string
-var cmd string
-var ValidateFiles bool
-var TestCases JsonResults
-var group sync.WaitGroup
-var results []Resource
+var RawLanguageList LanguageList
+var Languages map[string]Language
+var Tests []Test
+var Cases TestCases
 
-func InitTests(valid bool) {
-
-	var file []byte
-	var err error
-	var os string
-	var path string
-	var code []byte
-	var length int
-	var res Resource
-
-	ValidateFiles = valid
-
-	file, err = ioutil.ReadFile("config/challenge-info.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = json.Unmarshal(file, &ChallengeInfo)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	file, err = ioutil.ReadFile("config/cases.json")
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = json.Unmarshal(file, &TestCases)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	color.Set(color.FgWhite)
-	log.Println("Found test cases in file config/cases.json")
-
-	os = runtime.GOOS
-
-	switch os {
-	case "windows":
-		path, err = exec.LookPath("python")
-		cmd = "python"
-
-	case "linux":
-		path, err = exec.LookPath("python3")
-		cmd = "python3"
-
-	case "darwin":
-		path, err = exec.LookPath("python3")
-		cmd = "python3"
-	default:
-		Fatal(errors.New("Could not find python in path!"))
-	}
-
-	if err != nil {
-		Fatal(err)
-	}
-
-	color.Set(color.FgWhite)
-
-	log.Println("Found python executable in path at " + path)
-	log.Println("Loading test files")
-
-	FileList = GetFiles()
-
-	for _, i := range GetFiles() {
-
-		code, _ = ioutil.ReadFile(i)
-		length = len(code)
-
-		res = Resource{
-			File:            i,
-			Passed:          false,
-			FinishedTesting: false,
-			CompletedCases:  0,
-			TotalCases:      len(TestCases.Cases),
-			CodeLength:      length,
+func IsTest(extension string) bool {
+	for ext := range Languages {
+		if ext == extension {
+			return true
 		}
-		results = append(results, res)
 	}
 
-	group.Add(len(FileList))
+	return false
+}
 
-	log.Printf("Found %v tests\n", len(FileList))
-	color.Unset()
+func GatherTests() {
+
+	files, err := ioutil.ReadDir(".")
+
+	if err != nil {
+		Fatal("Error while reading file list in cwd", err)
+	}
+
+	for _, file := range files {
+		ext := filepath.Ext(file.Name())
+		if !file.IsDir() && IsTest(ext) {
+
+			lang := Languages[ext]
+			code, _ := ioutil.ReadFile(file.Name())
+
+			Tests = append(
+				Tests,
+				Test{
+					FileName:  file.Name(),
+					Extension: ext,
+
+					Language: lang,
+
+					CompletedCases:  0,
+					Passed:          false,
+					FinishedTesting: false,
+
+					CodeLength: len(code),
+					Time:       0,
+				},
+			)
+		}
+	}
+}
+
+func GatherLanguages() {
+	file, err := ioutil.ReadFile("config/language-config.json")
+
+	if err != nil {
+		Fatal("Error while reading config/language-config.json", err)
+	}
+
+	err = json.Unmarshal(file, &RawLanguageList)
+
+	if err != nil {
+		Fatal("Error while parsing languages list", err)
+	}
+
+	Languages = make(map[string]Language, len(RawLanguageList.Languages))
+
+	for _, lang := range RawLanguageList.Languages {
+		Languages[lang.Extension] = lang
+	}
+}
+
+func GatherCases() {
+	file, err := ioutil.ReadFile("config/cases.json")
+
+	if err != nil {
+		Fatal("Error while reading test cases from config/cases.json", err)
+	}
+
+	Cases = TestCases{}
+	err = json.Unmarshal(file, &Cases)
+
+	if err != nil {
+		Fatal("Error while parsing test cases", err)
+	}
+}
+
+func CompileFiles() {
+
+	for pos, file := range Tests {
+
+		if file.Language.CompiledLanguage {
+
+			execCommand := strings.ReplaceAll(file.Language.Command, "[f]", file.FileName)
+			execCommand = strings.ReplaceAll(execCommand, "[e]", file.Extension)
+			execCommand = strings.ReplaceAll(
+				execCommand,
+				"[n]",
+				file.FileName[0:len(file.FileName)-len(file.Extension)],
+			)
+
+			Info("Compiling file", file.FileName, "-", execCommand)
+
+			cmd, _ := shlex.Split(execCommand)
+
+			compiler := exec.Command(
+				cmd[0],
+				cmd[1:]...,
+			)
+
+			compiler.Start()
+			compiler.Wait()
+
+			file.Compiled = compiler.ProcessState.ExitCode() == 0
+
+			if !file.Compiled {
+				Warning(
+					"Could not compile file",
+					file.FileName,
+					"- process errored with",
+					compiler.ProcessState.String(),
+				)
+			} else {
+				Success("Successfully compiled", file.FileName)
+			}
+
+			Tests[pos] = file
+		}
+	}
+}
+
+func InitTests() {
+	GatherLanguages()
+	GatherTests()
+	GatherCases()
+	CompileFiles()
 }

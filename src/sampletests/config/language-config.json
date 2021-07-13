@@ -1,0 +1,18 @@
+{
+    "Languages": [
+        {
+            "Language": "Python",
+            "Command": "",
+            "Execution": "python3 '[f]'",
+            "Extension": ".py",
+            "CompiledLanguage": false
+        },
+        {
+            "Language": "C++",
+            "Command": "g++ -o '[n]' '[f]'",
+            "Execution": "./[n]",
+            "Extension": ".cpp",
+            "CompiledLanguage": true
+        }
+    ]
+}
