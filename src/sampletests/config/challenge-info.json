@@ -1,6 +1,5 @@
 {
-  "ChallengeName": "Simon Says!",
-  "ChallengeDescription": "Only what Simon said counts! On each test, you will be given a  string of any length. This string can be anything. Your job is to output what Simon said!",
-  "CleanUpCommand": "dir",
-  "Timeout": 30
+  "Title": "Simon Says!",
+  "Description": "Only what Simon said counts! On each test, you will be given a  string of any length.",
+  "Timeout": 60
 }

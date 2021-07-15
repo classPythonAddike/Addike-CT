@@ -1,0 +1,70 @@
+[
+  {
+    "File": "main.py",
+    "Extension": ".py",
+    "Language": {
+      "Language": "Python",
+      "Command": "",
+      "Execution": "python3 '[f]'",
+      "Extension": ".py",
+      "CompiledLanguage": false
+    },
+    "Compiled": false,
+    "CompletedCases": 2000,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 66,
+    "Time": 41
+  },
+  {
+    "File": "thedoctor.cpp",
+    "Extension": ".cpp",
+    "Language": {
+      "Language": "C++",
+      "Command": "g++ -o '[n]' '[f]'",
+      "Execution": "./[n]",
+      "Extension": ".cpp",
+      "CompiledLanguage": true
+    },
+    "Compiled": true,
+    "CompletedCases": 0,
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 93,
+    "Time": 0
+  },
+  {
+    "File": "thefirstalt.cpp",
+    "Extension": ".cpp",
+    "Language": {
+      "Language": "C++",
+      "Command": "g++ -o '[n]' '[f]'",
+      "Execution": "./[n]",
+      "Extension": ".cpp",
+      "CompiledLanguage": true
+    },
+    "Compiled": true,
+    "CompletedCases": 2000,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 188,
+    "Time": 4
+  },
+  {
+    "File": "thepres.py",
+    "Extension": ".py",
+    "Language": {
+      "Language": "Python",
+      "Command": "",
+      "Execution": "python3 '[f]'",
+      "Extension": ".py",
+      "CompiledLanguage": false
+    },
+    "Compiled": false,
+    "CompletedCases": 0,
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 12,
+    "Time": 0
+  }
+]

@@ -2,10 +2,10 @@ import json, random
 
 cases = {"Cases": []}
 
-for i in range(300):
-	case = {"Input": "4\n", "Output": ""}
-	for i in range(4):
-		num = random.randint(1, 1000)
+for i in range(2000):
+	case = {"Input": "", "Output": ""}
+	for i in range(1):
+		num = random.randint(1, 100)
 		sol = num * (num - 1)//2
 		case["Input"] += str(num) + "\n"
 		case["Output"] += str(sol) + "\n"

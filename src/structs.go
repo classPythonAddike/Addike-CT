@@ -3,7 +3,7 @@ package main
 import "time"
 
 type Test struct {
-	FileName  string
+	FileName  string `json:"File"`
 	Extension string
 
 	Language Language
@@ -16,8 +16,10 @@ type Test struct {
 	CodeLength int
 	Time       int
 
-	StartTime time.Time
-	EndTime   time.Time
+	startTime time.Time
+	endTime   time.Time
+
+	timedOut bool
 }
 
 type Language struct {
@@ -39,4 +41,10 @@ type TestCases struct {
 type Case struct {
 	Input  string
 	Output string
+}
+
+type ChallengeInfo struct {
+	Title       string
+	Description string
+	Timeout     int
 }

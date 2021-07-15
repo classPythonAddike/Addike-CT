@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os/exec"
 	"path/filepath"
@@ -14,6 +15,8 @@ var RawLanguageList LanguageList
 var Languages map[string]Language
 var Tests []Test
 var Cases TestCases
+
+var CInfo ChallengeInfo
 
 func IsTest(extension string) bool {
 	for ext := range Languages {
@@ -58,6 +61,8 @@ func GatherTests() {
 			)
 		}
 	}
+
+	PlainInfo("Found", fmt.Sprintf("%v", len(Tests)), "tests to run")
 }
 
 func GatherLanguages() {
@@ -78,6 +83,8 @@ func GatherLanguages() {
 	for _, lang := range RawLanguageList.Languages {
 		Languages[lang.Extension] = lang
 	}
+
+	PlainInfo("Found", fmt.Sprintf("%v", len(Languages)), "languages")
 }
 
 func GatherCases() {
@@ -93,6 +100,8 @@ func GatherCases() {
 	if err != nil {
 		Fatal("Error while parsing test cases", err)
 	}
+
+	PlainInfo("Found", fmt.Sprintf("%v", len(Cases.Cases)), "test cases")
 }
 
 func CompileFiles() {
@@ -109,7 +118,7 @@ func CompileFiles() {
 				file.FileName[0:len(file.FileName)-len(file.Extension)],
 			)
 
-			Info("Compiling file", file.FileName, "-", execCommand)
+			PlainInfo("Compiling file", file.FileName, "-", execCommand)
 
 			cmd, _ := shlex.Split(execCommand)
 
@@ -139,9 +148,28 @@ func CompileFiles() {
 	}
 }
 
+func ReadChallengeInfo() {
+
+	file, err := ioutil.ReadFile("config/challenge-info.json")
+
+	if err != nil {
+		Fatal("Error while reading test cases from config/challenge-info.json", err)
+	}
+
+	err = json.Unmarshal(file, &CInfo)
+
+	if err != nil {
+		Fatal("Error while parsing test cases", err)
+	}
+
+	PlainInfo("Parsed config/challenge-info.json successfully")
+}
+
 func InitTests() {
+	ReadChallengeInfo()
 	GatherLanguages()
 	GatherTests()
 	GatherCases()
+	PrintLine()
 	CompileFiles()
 }

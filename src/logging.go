@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -29,4 +30,13 @@ func Success(message ...string) {
 	color.Set(color.FgGreen)
 	log.Println(strings.Join(message, " "))
 	color.Unset()
+}
+
+func PlainInfo(message ...string) {
+	color.Unset()
+	log.Println(strings.Join(message, " "))
+}
+
+func PrintLine() {
+	fmt.Println("=====================================================================")
 }

@@ -1,3 +1,3 @@
-for k in range(int(input())):
+for k in range(1):
     i = int(input())
     print(i * (i - 1)//2)
