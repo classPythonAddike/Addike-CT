@@ -2,7 +2,7 @@
   <a href="https://github.com/Addike-CT/Backend/issues"><img src="https://img.shields.io/github/issues/Addike-CT/Backend.svg" /></a>
   <a href="https://github.com/Addike-CT/Backend/pulls"><img src="https://img.shields.io/github/issues-pr/Addike-CT/Backend.svg" /></a>
   <a href="/LICENSE"><img src="https://img.shields.io/badge/licence-MIT-blue.svg" /></a>
-  <a href="https://discord.gg/twt"><img src="https://discord.com/api/guilds/501090983539245061/widget.png?style=shield" /></a>
+  <a href="https://discord.gg/GzbExg3Q"><img src="https://discord.com/api/guilds/713785142597910549/widget.png?style=shield" /></a>
 </p>
 
 <div align="center">
@@ -21,6 +21,6 @@ You can download the zip files for your operating system from the [Release tab](
 
 ### ⬅️ Contributing
 
-Unfortunately, since Addike-CT is still in the alpha stage, contributing is not supported yet. Hopefully, it will be allowed soon! However, you can still open issues, or ping [me](https://discord.com/users/702432228160045106) in the [Tech-With-Tim Discord Server](discord.gg/twt) for suggestions!
+Unfortunately, since Addike-CT is still in the alpha stage, contributing is not supported yet. Hopefully, it will be allowed soon! However, you can still open issues, or ping [me](https://discord.com/users/702432228160045106) in the [Fire Army Discord Server](https://discord.gg/GzbExg3Q) for suggestions!
 
 <!---See the list of [contributors](https://github.com/Addike-CT/Backend/contributors) who participated in this project.--->
