@@ -22,4 +22,4 @@ Addike-ct v0.1.0 (beta)
   ```
 You may have to restart your terminal for these changes to take effect.
 
-Once you're done, head over to [Setup.md](/docs/Setup.md) to create your first suite of tests!
+Once you're done, head over to [Setup](/Setup) to create your first suite of tests!

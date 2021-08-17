@@ -25,5 +25,3 @@ Or
 $ addike-ct --validate
 ```
 The latter tests files _only after validating them_. If you use this, you will need to have a `validate.py` in your `config` directory. This is generally recommended when testing third party code.
-
-If yes, congratulate yourself! You have successfully installed, and used `addike-ct`! You may also navigate to [localhost:8080](http://localhost:8080) to view your results in the form of a webpage, which was made with Svelte!
