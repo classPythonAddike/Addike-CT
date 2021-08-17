@@ -15,10 +15,10 @@ To install Addike-CT, make sure you have both the frontend (html + js + css file
 
 1. Place the executable in a convenient location, for example - `C:\Users\Username\addike-ct\addike-ct.exe` on Windows. Then add this location to your system path.
 2. Next, place the `public` folder in a convenient location, for example - `C:\Users\Username\addike-ct\public` on Windows. Then create a new environment variable by the name of `CTPath` and set it to the location of the public folder. In this example, it would be `CTPath='C:\Users\Username\addike-ct\public'`
-3. Finally, verify your manual installation by typing `addike-ct -version` in the terminal. You should receive something like this:
+3. Finally, verify your manual installation by typing `addike-ct --version` in the terminal. You should receive something like this:
 ```
-$ addike-ct -version
-Addike-ct v0.0.1 (alpha)
+$ addike-ct --version
+Addike-ct v0.1.0 (beta)
   ```
 You may have to restart your terminal for these changes to take effect.
 

@@ -15,7 +15,6 @@ var files []string = []string{
 	"/config/challenge-info.json",
 	"/config/generator.py",
 	"/config/language-config.json",
-	"/config/validate.py",
 }
 
 func CreateNewProject() {
@@ -38,8 +37,37 @@ func CreateNewProject() {
 		content, _ := ioutil.ReadAll(resp.Body)
 		os.WriteFile("."+route, content, 0755)
 	}
+
+	CreateSampleTests()
 }
 
 func CreateFolders() {
 	os.Mkdir("config", 0755)
+}
+
+var extensions []string = []string{
+	",c",
+	".cpp",
+	".cs",
+	".go",
+	".java",
+	".js",
+	".py",
+	".rb",
+}
+
+func CreateSampleTests() {
+	for _, ext := range extensions {
+		resp, err := http.Get(githubRepo + "/main" + ext)
+
+		if err != nil {
+			Warning("Error while fetching main"+ext, "-", err.Error())
+			continue
+		}
+
+		PlainInfo("Creating file main" + ext)
+
+		content, _ := ioutil.ReadAll(resp.Body)
+		os.WriteFile("./main"+ext, content, 0755)
+	}
 }
