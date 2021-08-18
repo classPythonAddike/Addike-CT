@@ -4,3 +4,8 @@
 /src/sampletests/run.sh
 /src/sampletests/thefirstalt
 /src/sampletests/thedoctor
+
+/node_modules/
+/public/build/
+
+.DS_Store
