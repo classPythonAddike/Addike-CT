@@ -57,6 +57,7 @@ func TestFile(test *Test) bool {
 		}
 
 		executor.Start()
+		test.process = executor.Process
 
 		go func() {
 			defer stdin.Close()
@@ -111,6 +112,7 @@ func TestFileOrTimeout(test *Test) {
 
 	case <-time.After(time.Second * time.Duration(CInfo.Timeout)):
 		test.timedOut = true
+		test.process.Kill()
 		Warning(test.FileName, "timed out")
 	}
 

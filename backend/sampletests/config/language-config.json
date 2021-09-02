@@ -2,43 +2,36 @@
     "Languages": [
         {
             "Language": "C",
-            "Command": "g++ -o '[n]' '[f]'",
-            "Execution": " ./[n]",
+            "Command": "g++ -o '[n]-c' '[f]'",
+            "Execution": " ./[n]-c",
             "Extension": ".c",
             "CompiledLanguage": true
         },
         {
             "Language": "C++",
-            "Command": "g++ -o '[n]' '[f]'",
-            "Execution": "./[n]",
+            "Command": "g++ -o '[n]-cpp' '[f]'",
+            "Execution": "./[n]-cpp",
             "Extension": ".cpp",
             "CompiledLanguage": true
         },
         {
-            "Language": "C#",
-            "Command": "mcs '[f]'",
-            "Execution": "mono '[n]'",
-            "Extension": ".cs",
-            "CompiledLanguage": true
-        },
-        {
             "Language": "Golang",
-            "Command": "go build -o '[n]' '[f]'",
-            "Execution": "./'[n]'",
+            "Command": "go build -o '[n]-go' '[f]'",
+            "Execution": "./'[n]-go'",
             "Extension": ".go",
             "CompiledLanguage": true
         },
         {
             "Language": "Python",
             "Command": "",
-            "Execution": "python3 '[f]",
+            "Execution": "python3 '[f]'",
             "Extension": ".py",
             "CompiledLanguage": false
         },
         {
             "Language": "Ruby",
             "Command": "",
-            "Execution": "ruby '[f]",
+            "Execution": "ruby '[f]'",
             "Extension": ".rb",
             "CompiledLanguage": false
         }

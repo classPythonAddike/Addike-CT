@@ -1,0 +1,87 @@
+[
+  {
+    "File": "main.c",
+    "Extension": ".c",
+    "Language": {
+      "Language": "C",
+      "Command": "g++ -o '[n]-c' '[f]'",
+      "Execution": " ./[n]-c",
+      "Extension": ".c",
+      "CompiledLanguage": true
+    },
+    "Compiled": true,
+    "CompletedCases": 4,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 66,
+    "Time": 0
+  },
+  {
+    "File": "main.cpp",
+    "Extension": ".cpp",
+    "Language": {
+      "Language": "C++",
+      "Command": "g++ -o '[n]-cpp' '[f]'",
+      "Execution": "./[n]-cpp",
+      "Extension": ".cpp",
+      "CompiledLanguage": true
+    },
+    "Compiled": true,
+    "CompletedCases": 4,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 112,
+    "Time": 0
+  },
+  {
+    "File": "main.go",
+    "Extension": ".go",
+    "Language": {
+      "Language": "Golang",
+      "Command": "go build -o '[n]-go' '[f]'",
+      "Execution": "./'[n]-go'",
+      "Extension": ".go",
+      "CompiledLanguage": true
+    },
+    "Compiled": true,
+    "CompletedCases": 4,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 74,
+    "Time": 0
+  },
+  {
+    "File": "main.py",
+    "Extension": ".py",
+    "Language": {
+      "Language": "Python",
+      "Command": "",
+      "Execution": "python3 '[f]'",
+      "Extension": ".py",
+      "CompiledLanguage": false
+    },
+    "Compiled": false,
+    "CompletedCases": 0,
+    "Passed": false,
+    "FinishedTesting": true,
+    "CodeLength": 106,
+    "Time": 10
+  },
+  {
+    "File": "main.rb",
+    "Extension": ".rb",
+    "Language": {
+      "Language": "Ruby",
+      "Command": "",
+      "Execution": "ruby '[f]'",
+      "Extension": ".rb",
+      "CompiledLanguage": false
+    },
+    "Compiled": false,
+    "CompletedCases": 4,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 21,
+    "Time": 0
+  }
+]

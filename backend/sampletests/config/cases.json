@@ -1,20 +1,20 @@
 {
     "Cases": [
         {
-            "Input": "90\n",
-            "Output": "90\n"
+            "Input": "",
+            "Output": "Hello, World!\n"
         },
         {
-            "Input": "79\n",
-            "Output": "79\n"
+            "Input": "",
+            "Output": "Hello, World!\n"
         },
         {
-            "Input": "56\n",
-            "Output": "56\n"
+            "Input": "",
+            "Output": "Hello, World!\n"
         },
         {
-            "Input": "49\n",
-            "Output": "49\n"
+            "Input": "",
+            "Output": "Hello, World!\n"
         }
     ]
 }

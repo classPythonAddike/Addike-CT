@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"os"
+	"time"
+)
 
 type Test struct {
 	FileName  string `json:"File"`
@@ -20,6 +23,7 @@ type Test struct {
 	endTime   time.Time
 
 	timedOut bool
+	process  *os.Process
 }
 
 type Language struct {
