@@ -15,12 +15,10 @@
 
 Addike-CT is an efficient, and user-friendly program tester, implemented in Golang and Svelte. When it is executed, it compares the stdout of programs in the working directory against the required stdout in a secure manner. It also implements a clean ui, in the browser, so you can easily track the progress of your testing!
 
-### ⛏️ Download & Install
-
-You can download the zip files for your operating system from the [Release tab](https://github.com/classPythonAddike/Challenge-Tester-Backend/releases). For detailed installation instructions check out [Installation.md](/docs/Installation.md)
+Checkout our docs for detailed usage instructions - [classpythonaddike.github.io/Addike-CT/](https://classpythonaddike.github.io/Addike-CT/#/)
 
 ### ⬅️ Contributing
 
-Unfortunately, since Addike-CT is still in the alpha stage, contributing is not supported yet. Hopefully, it will be allowed soon! However, you can still open issues, or ping [me](https://discord.com/users/702432228160045106) in the [Fire Army Discord Server](https://discord.gg/GzbExg3Q) for suggestions!
+Feel free to report bugs through issues, or make PR's to implement bug fixes/features you'd like to see!
 
-<!---See the list of [contributors](https://github.com/Addike-CT/Backend/contributors) who participated in this project.--->
+See the list of [contributors](https://github.com/Addike-CT/Backend/contributors) who participated in this project.
