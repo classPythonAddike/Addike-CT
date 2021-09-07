@@ -1,11 +1,8 @@
-/src/bin/
-/src/main
-/src/main.exe
-/src/sampletests/run.sh
-/src/sampletests/thefirstalt
-/src/sampletests/thedoctor
+backend/bin/
+backend/main
+backend/main.exe
 
-/node_modules/
-/public/build/
+frontend/node_modules/
+frontend/public/build/
 
 .DS_Store

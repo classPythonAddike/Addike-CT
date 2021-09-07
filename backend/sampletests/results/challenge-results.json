@@ -61,11 +61,11 @@
       "CompiledLanguage": false
     },
     "Compiled": false,
-    "CompletedCases": 0,
-    "Passed": false,
+    "CompletedCases": 4,
+    "Passed": true,
     "FinishedTesting": true,
-    "CodeLength": 106,
-    "Time": 10
+    "CodeLength": 22,
+    "Time": 0
   },
   {
     "File": "main.rb",

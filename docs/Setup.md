@@ -4,9 +4,9 @@
 
 Make sure you have installed, and verified your installation of Addike-CT before continuing
 
-## ⛏️ Setup 
+## ⛏️ Setup a Project to Test
 
-1. Setup has been made much easier in the second release of addike-ct. You can just run
+1. Setup has been made much easier since the first stable release of Addike-CT. You can just run the following command to create a new project -
 
 ```sh
 $ addike-ct --create
@@ -14,14 +14,12 @@ $ addike-ct --create
 
 to set up a new project. You can then replace the default test files with your own, and fill out the data in `config/` with your own, and you should be good to go!
 
-## 📚 Usage 
+## 📚 Running Tests
 
-Once you have set up your project, you're now ready to start testing! There are two ways in which you can test files -
+Once you have set up your project, you're now ready to start testing! Simply run the following command in your terminal -
 ```sh
 $ addike-ct
 ```
-Or
-```sh
-$ addike-ct --validate
-```
-The latter tests files _only after validating them_. If you use this, you will need to have a `validate.py` in your `config` directory. This is generally recommended when testing third party code.
+Then navigate to `http://localhost:8080` to view the progress of your tests!
+
+As of now, Addike-CT runs the tests locally, which can be a security issue if the code you're testing is from third parties. Don't worry too much though! We expect to release remote testing on WandBox soon!
