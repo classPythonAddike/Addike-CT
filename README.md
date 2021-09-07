@@ -17,6 +17,8 @@ Addike-CT is an efficient, and user-friendly program tester, implemented in Gola
 
 Checkout our docs for detailed usage instructions - [classpythonaddike.github.io/Addike-CT/](https://classpythonaddike.github.io/Addike-CT/#/)
 
+A big thanks to [FrankR-7](https://github.com/FrankR-7) and [Sanchit-Jain07](https://github.com/Sanchit-Jain07) for helping out with the frontend!
+
 ### ⬅️ Contributing
 
 Feel free to report bugs through issues, or make PR's to implement bug fixes/features you'd like to see!
