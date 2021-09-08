@@ -34,6 +34,13 @@
             "Execution": "ruby '[f]'",
             "Extension": ".rb",
             "CompiledLanguage": false
-        }
+        },
+		{
+			"Language": "JavaScript",
+			"Command": "",
+			"Execution": "node '[f]'",
+			"Extension": ".js",
+			"CompiledLanguage": false
+		}
     ]
 }

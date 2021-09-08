@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/fatih/color"
 	flag "github.com/spf13/pflag"
@@ -30,7 +31,6 @@ func main() {
 	color.NoColor = *flagNoColor
 
 	InitTests()
-	go RunTests()
 
 	http.HandleFunc("/startup", ServeFiles)
 	http.HandleFunc("/progress", ServeProgress)
@@ -38,5 +38,9 @@ func main() {
 
 	PrintLine()
 	Info("Running on http://localhost:8080")
+
+	time.Sleep(2 * time.Second)
+	go RunTests()
+
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

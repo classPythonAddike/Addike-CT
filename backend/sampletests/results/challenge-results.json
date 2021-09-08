@@ -51,6 +51,23 @@
     "Time": 0
   },
   {
+    "File": "main.js",
+    "Extension": ".js",
+    "Language": {
+      "Language": "JavaScript",
+      "Command": "",
+      "Execution": "node '[f]'",
+      "Extension": ".js",
+      "CompiledLanguage": false
+    },
+    "Compiled": false,
+    "CompletedCases": 4,
+    "Passed": true,
+    "FinishedTesting": true,
+    "CodeLength": 29,
+    "Time": 0
+  },
+  {
     "File": "main.py",
     "Extension": ".py",
     "Language": {

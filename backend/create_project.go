@@ -46,11 +46,9 @@ func CreateFolders() {
 }
 
 var extensions []string = []string{
-	",c",
+	".c",
 	".cpp",
-	".cs",
 	".go",
-	".java",
 	".js",
 	".py",
 	".rb",
