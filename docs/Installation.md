@@ -8,7 +8,7 @@ There are two ways to download Addike-CT
 
 ### From Releases
 
-1. Head over to the [Releases tab](https://github.com/classPythonAddike/Challenge-Tester-Backend/releases), and download the zip file which matches your operating system. Unzip the file. You should see an executable, and a folder named `public` in the unzipped contents.
+1. Head over to the [Releases tab](https://github.com/classPythonAddike/Addike-CT/releases), and download the zip file which matches your operating system. Unzip the file. You should see an executable, and a folder named `public` in the unzipped contents.
 2. Move the executable into your system path.
 3. Copy the `public` folder into a suitable location.
 4. Finally, create an environment variable called `CTPath`. Set its value to the location of the `public` folder.
