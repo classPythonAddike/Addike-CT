@@ -71,7 +71,7 @@ func ServeProgress(w http.ResponseWriter, r *http.Request) {
 		} else { // file.Endtime will not be defined yet, so its running tests
 			ReturnData.Times = append(
 				ReturnData.Times,
-				float32(time.Since(file.startTime).Seconds()),
+				float32(time.Since(file.startTime).Milliseconds())/float32(1000),
 			)
 		}
 	}

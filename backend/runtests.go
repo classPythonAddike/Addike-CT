@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -135,8 +137,16 @@ func RunTests() {
 
 		Tests[pos].endTime = time.Now()
 
-		duration := Tests[pos].endTime.Sub(Tests[pos].startTime).Seconds()
-		Tests[pos].Time = int(duration)
+		duration := float64(Tests[pos].endTime.Sub(Tests[pos].startTime).Milliseconds())
+		Tests[pos].Time = duration / float64(1000)
+
+		log.Println(
+			"Finished testing",
+			Tests[pos].FileName,
+			"- took",
+			fmt.Sprintf("%v", Tests[pos].Time),
+			"seconds",
+		)
 	}
 
 	PrintLine()

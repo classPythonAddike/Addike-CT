@@ -8,13 +8,14 @@ import (
 	"path/filepath"
 )
 
-var githubRepo string = "https://raw.githubusercontent.com/classPythonAddike/Addike-CT/master/src/sampletests"
+var githubRepo string = "https://raw.githubusercontent.com/classPythonAddike/Addike-CT/master/backend/sampletests"
 
 var files []string = []string{
 	"/config/cases.json",
 	"/config/challenge-info.json",
 	"/config/generator.py",
 	"/config/language-config.json",
+	"/config/prettier.py",
 }
 
 func CreateNewProject() {

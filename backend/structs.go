@@ -17,7 +17,7 @@ type Test struct {
 	FinishedTesting bool
 
 	CodeLength int
-	Time       int
+	Time       float64
 
 	startTime time.Time
 	endTime   time.Time

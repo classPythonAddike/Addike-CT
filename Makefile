@@ -5,8 +5,8 @@ build:
 
 install:
 	cd frontend && npm install && npm run build
-	@cp frontend/public $$CTPath -r
-	@cd backend && go build -o "$(target)" .
+	cp frontend/public $$CTPath -r
+	cd backend && go build -o "$(target)" .
 	make clean
 
 run:
