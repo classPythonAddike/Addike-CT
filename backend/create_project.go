@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 )
 
-var githubRepo string = "https://raw.githubusercontent.com/classPythonAddike/challenge-tester-backend/master/src/sampletests"
+var githubRepo string = "https://raw.githubusercontent.com/classPythonAddike/Addike-CT/master/src/sampletests"
 
 var files []string = []string{
 	"/config/cases.json",
