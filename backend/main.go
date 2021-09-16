@@ -19,7 +19,7 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Println("Addike-CT v0.1.0 (stable)")
+		fmt.Println("Addike-CT v0.1.1")
 		return
 	}
 
